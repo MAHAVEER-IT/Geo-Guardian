@@ -4,7 +4,7 @@ import { Toaster, toast } from 'react-hot-toast';
 import AdminMap from './components/AdminMap';
 
 // Connect to the backend Socket.io server
-const socket = io('http://localhost:5000');
+const socket = io('https://geo-guardian-backend.onrender.com');
 
 function App() {
   useEffect(() => {

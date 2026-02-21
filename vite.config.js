@@ -7,5 +7,19 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'leaflet-vendor': ['leaflet', 'react-leaflet', 'leaflet-draw', 'react-leaflet-draw'],
+          'socket-vendor': ['socket.io-client']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
   }
 })

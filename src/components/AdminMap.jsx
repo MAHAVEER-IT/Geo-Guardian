@@ -10,7 +10,7 @@ import LocationSearchBar from './LocationSearchBar';
 import RecenterButton from './RecenterButton';
 import DrawingControls from './DrawingControls';
 
-const API_URL = 'http://localhost:5000/api/zones';
+const API_URL = 'https://geo-guardian-backend.onrender.com/api/zones';
 
 // Fix Leaflet default icon issue with Vite
 import L from 'leaflet';
