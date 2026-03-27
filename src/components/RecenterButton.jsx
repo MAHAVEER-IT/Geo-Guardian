@@ -4,11 +4,11 @@ function RecenterButton({ userLocation, onRecenter }) {
   return (
     <button
       onClick={onRecenter}
-      className="absolute top-4 right-4 z-[1001] backdrop-blur-md bg-gradient-to-r from-blue-500/10 to-cyan-500/5 hover:from-blue-500/20 hover:to-cyan-500/15 text-white rounded-xl shadow-2xl px-5 py-3 transition-all duration-300 flex items-center gap-2.5 hover:scale-105 hover:shadow-blue-500/50 border border-white/30 group"
+      className="absolute right-4 top-4 z-[1001] flex items-center gap-2.5 rounded-2xl border border-white/30 bg-slate-900/50 px-4 py-2.5 text-slate-100 shadow-xl shadow-slate-900/35 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-900/60"
       title="Go to my location"
     >
-      <span className="text-xl group-hover:scale-110 transition-transform duration-200">📍</span>
-      <span className="font-semibold tracking-wide">My Location</span>
+      <span className="grid h-7 w-7 place-items-center rounded-full bg-sky-500/25 text-lg">📍</span>
+      <span className="text-sm font-semibold tracking-wide">My Location</span>
     </button>
   );
 }

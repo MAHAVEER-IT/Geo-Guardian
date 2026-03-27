@@ -348,15 +348,18 @@ function AdminMap({ socket }) {
   return (
     <div className="h-full w-full">
       {loading ? (
-        <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-sky-50 via-white to-amber-50">
           <div className="relative">
             {/* Animated spinner */}
-            <div className="w-20 h-20 border-4 border-blue-200/30 border-t-blue-500 rounded-full animate-spin"></div>
-            <div className="absolute inset-0 w-20 h-20 border-4 border-transparent border-t-cyan-400 rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1s' }}></div>
+            <div className="h-20 w-20 animate-spin rounded-full border-4 border-sky-100 border-t-sky-500" />
+            <div
+              className="absolute inset-0 h-20 w-20 animate-spin rounded-full border-4 border-transparent border-t-cyan-400"
+              style={{ animationDirection: 'reverse', animationDuration: '1s' }}
+            />
           </div>
           <div className="mt-8 text-center">
-            <p className="text-white text-2xl font-bold tracking-wide">Loading Map...</p>
-            <p className="text-blue-300 text-sm mt-2 animate-pulse">Preparing your dashboard</p>
+            <p className="font-heading text-2xl font-bold tracking-wide text-slate-800">Loading Map...</p>
+            <p className="mt-2 text-sm font-medium text-slate-500 animate-pulse">Preparing your dashboard</p>
           </div>
         </div>
       ) : (
