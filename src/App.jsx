@@ -6,12 +6,26 @@ import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 
 // Connect to the backend Socket.io server
-const socket = io('https://geo-guardian-backend.onrender.com');
+const SOCKET_URL =
+  import.meta.env.VITE_SOCKET_URL ||
+  import.meta.env.VITE_API_URL ||
+  'https://geo-guardian-backend.onrender.com';
+
+const socket = io(SOCKET_URL, {
+  transports: ['websocket', 'polling'],
+  withCredentials: true,
+  reconnection: true,
+  reconnectionAttempts: Infinity,
+  reconnectionDelay: 1000,
+  reconnectionDelayMax: 5000,
+  timeout: 15000,
+});
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentView, setCurrentView] = useState('landing');
   const [socketConnected, setSocketConnected] = useState(socket.connected);
+  const [socketIssue, setSocketIssue] = useState('');
   const [liveAlerts, setLiveAlerts] = useState([]);
   const [alertFocusLocation, setAlertFocusLocation] = useState(null);
   const [tick, setTick] = useState(Date.now());
@@ -46,10 +60,16 @@ function App() {
   useEffect(() => {
     const handleConnect = () => {
       setSocketConnected(true);
+      setSocketIssue('');
     };
 
     const handleDisconnect = () => {
       setSocketConnected(false);
+    };
+
+    const handleConnectError = (error) => {
+      setSocketConnected(false);
+      setSocketIssue(error?.message || 'Connection error');
     };
 
     const handleAdminAlert = (data) => {
@@ -106,12 +126,14 @@ function App() {
 
     socket.on('connect', handleConnect);
     socket.on('disconnect', handleDisconnect);
+    socket.on('connect_error', handleConnectError);
     socket.on('admin_alert', handleAdminAlert);
 
     // Cleanup on unmount
     return () => {
       socket.off('connect', handleConnect);
       socket.off('disconnect', handleDisconnect);
+      socket.off('connect_error', handleConnectError);
       socket.off('admin_alert', handleAdminAlert);
     };
   }, []);
@@ -219,6 +241,12 @@ function App() {
             </div>
 
             <div className="mt-3 max-h-56 space-y-2 overflow-y-auto pr-1">
+              {socketIssue && !socketConnected && (
+                <div className="rounded-xl border border-red-300/35 bg-red-950/30 px-3 py-2 text-[11px] text-red-100">
+                  Socket issue: {socketIssue}
+                </div>
+              )}
+
               {liveAlerts.length === 0 ? (
                 <div className="rounded-xl border border-dashed border-white/25 bg-slate-900/35 px-3 py-3 text-xs text-slate-300">
                   Waiting for incoming danger alerts...
