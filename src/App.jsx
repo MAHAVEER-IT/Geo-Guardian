@@ -5,6 +5,9 @@ import AdminMap from './components/AdminMap';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 
+const AUTH_STORAGE_KEY = 'gg_admin_auth';
+const VIEW_STORAGE_KEY = 'gg_admin_view';
+
 // Connect to the backend Socket.io server
 const SOCKET_URL =
   import.meta.env.VITE_SOCKET_URL ||
@@ -22,8 +25,24 @@ const socket = io(SOCKET_URL, {
 });
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentView, setCurrentView] = useState('landing');
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+  });
+
+  const [currentView, setCurrentView] = useState(() => {
+    if (typeof window === 'undefined') return 'landing';
+
+    const hasSession = window.localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+    if (!hasSession) return 'landing';
+
+    const storedView = window.localStorage.getItem(VIEW_STORAGE_KEY);
+    if (storedView === 'dashboard' || storedView === 'landing') {
+      return storedView;
+    }
+
+    return 'dashboard';
+  });
   const [socketConnected, setSocketConnected] = useState(socket.connected);
   const [socketIssue, setSocketIssue] = useState('');
   const [liveAlerts, setLiveAlerts] = useState([]);
@@ -56,6 +75,22 @@ function App() {
 
     return () => window.clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if (isAuthenticated) {
+      window.localStorage.setItem(AUTH_STORAGE_KEY, 'true');
+      window.localStorage.setItem(
+        VIEW_STORAGE_KEY,
+        currentView === 'login' ? 'dashboard' : currentView
+      );
+      return;
+    }
+
+    window.localStorage.removeItem(AUTH_STORAGE_KEY);
+    window.localStorage.setItem(VIEW_STORAGE_KEY, 'landing');
+  }, [isAuthenticated, currentView]);
 
   useEffect(() => {
     const handleConnect = () => {
