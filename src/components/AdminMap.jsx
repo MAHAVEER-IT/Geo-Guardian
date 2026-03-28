@@ -39,7 +39,7 @@ function LocationRecenter({ center, zoom }) {
   return null;
 }
 
-function AdminMap({ socket }) {
+function AdminMap({ socket, liveFocusLocation }) {
   const [zones, setZones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userLocation, setUserLocation] = useState(null); // User's actual GPS location
@@ -79,6 +79,13 @@ function AdminMap({ socket }) {
   useEffect(() => {
     fetchZones();
   }, []);
+
+  useEffect(() => {
+    if (liveFocusLocation && liveFocusLocation.length === 2) {
+      setCurrentLocation(liveFocusLocation);
+      setTargetZoom(16);
+    }
+  }, [liveFocusLocation]);
 
   const fetchZones = async () => {
     try {
