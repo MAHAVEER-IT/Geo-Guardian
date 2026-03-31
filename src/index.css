@@ -22,8 +22,7 @@ body {
   font-family: 'Manrope', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   background: linear-gradient(160deg, var(--gg-bg-start), var(--gg-bg-mid), var(--gg-bg-end));
   color: var(--gg-text-primary);
 }
@@ -31,6 +30,493 @@ body {
 #root {
   width: 100vw;
   height: 100vh;
+}
+
+.gg-landing-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.gg-landing-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/landing-page.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1);
+}
+
+.gg-landing-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.26), transparent 44%),
+    radial-gradient(circle at 78% 28%, rgba(56, 189, 248, 0.22), transparent 40%),
+    linear-gradient(95deg, rgba(2, 10, 37, 0.72) 0%, rgba(6, 30, 78, 0.55) 42%, rgba(2, 6, 23, 0.62) 100%);
+}
+
+.gg-landing-overlay {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: min(680px, 92vw);
+  margin-left: clamp(16px, 6vw, 88px);
+  animation: fade-up 0.75s ease-out both;
+}
+
+.gg-landing-kicker {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid rgba(191, 219, 254, 0.42);
+  background: rgba(15, 23, 42, 0.34);
+  border-radius: 9999px;
+  padding: 7px 14px;
+  color: #dbeafe;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.gg-landing-title {
+  margin-top: 18px;
+  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+  font-size: clamp(2rem, 4.5vw, 4.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+  text-shadow: 0 10px 35px rgba(2, 6, 23, 0.48);
+}
+
+.gg-landing-subtitle {
+  margin-top: 16px;
+  max-width: 58ch;
+  color: rgba(226, 232, 240, 0.95);
+  font-size: clamp(0.92rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+}
+
+.gg-landing-actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gg-btn {
+  border-radius: 14px;
+  border: 1px solid transparent;
+  padding: 12px 18px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.gg-btn:hover {
+  transform: translateY(-2px);
+}
+
+.gg-btn-primary {
+  background: linear-gradient(110deg, #0ea5e9, #2563eb);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.38);
+}
+
+.gg-btn-primary:hover {
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.48);
+}
+
+.gg-btn-secondary {
+  border-color: rgba(219, 234, 254, 0.55);
+  background: rgba(15, 23, 42, 0.36);
+  color: #e2e8f0;
+  backdrop-filter: blur(6px);
+}
+
+.gg-btn-secondary:hover {
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.gg-btn-danger {
+  border-color: rgba(248, 113, 113, 0.52);
+  background: rgba(127, 29, 29, 0.45);
+  color: #fecaca;
+}
+
+.gg-btn-danger:hover {
+  background: rgba(127, 29, 29, 0.65);
+}
+
+.gg-btn-block {
+  width: 100%;
+}
+
+.gg-login-wrap {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.gg-login-card {
+  width: min(460px, 92vw);
+  border: 1px solid rgba(191, 219, 254, 0.38);
+  border-radius: 22px;
+  padding: 26px 22px;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(160deg, rgba(8, 19, 52, 0.74), rgba(10, 42, 89, 0.55));
+  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.5);
+}
+
+.gg-login-title {
+  margin-top: 14px;
+  color: #f8fafc;
+  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+}
+
+.gg-login-subtitle {
+  margin-top: 10px;
+  color: rgba(219, 234, 254, 0.92);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.gg-login-form {
+  margin-top: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.gg-login-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #bfdbfe;
+}
+
+.gg-login-input {
+  border: 1px solid rgba(191, 219, 254, 0.45);
+  border-radius: 12px;
+  background: rgba(2, 6, 23, 0.5);
+  color: #f8fafc;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gg-login-input::placeholder {
+  color: rgba(191, 219, 254, 0.72);
+}
+
+.gg-login-input:focus {
+  border-color: rgba(125, 211, 252, 0.95);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.24);
+}
+
+.gg-login-error {
+  margin-top: 2px;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  border-radius: 10px;
+  background: rgba(127, 29, 29, 0.45);
+  color: #fecaca;
+  font-size: 0.82rem;
+  padding: 8px 10px;
+}
+
+.gg-login-footer {
+  margin-top: 12px;
+}
+
+.gg-guide-root {
+  min-height: 100vh;
+  width: 100vw;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(14, 165, 233, 0.28), transparent 34%),
+    radial-gradient(circle at 85% 16%, rgba(37, 99, 235, 0.22), transparent 36%),
+    linear-gradient(140deg, #06112f, #0b1f4a 52%, #08132d);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.gg-guide-shell {
+  width: min(1100px, 96vw);
+  max-height: 94vh;
+  overflow: auto;
+  border: 1px solid rgba(191, 219, 254, 0.32);
+  border-radius: 24px;
+  background: linear-gradient(165deg, rgba(8, 19, 52, 0.74), rgba(8, 23, 59, 0.64));
+  box-shadow: 0 24px 64px rgba(2, 6, 23, 0.56);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+}
+
+.gg-guide-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.gg-guide-head-hero {
+  border: 1px solid rgba(191, 219, 254, 0.24);
+  border-radius: 18px;
+  padding: 14px;
+  background: linear-gradient(150deg, rgba(2, 6, 23, 0.36), rgba(8, 23, 59, 0.18));
+}
+
+.gg-guide-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gg-guide-kicker {
+  display: inline-flex;
+  border: 1px solid rgba(191, 219, 254, 0.42);
+  background: rgba(15, 23, 42, 0.34);
+  border-radius: 9999px;
+  padding: 7px 14px;
+  color: #dbeafe;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.gg-guide-title {
+  margin-top: 14px;
+  color: #f8fafc;
+  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.gg-guide-subtitle {
+  margin-top: 8px;
+  color: rgba(219, 234, 254, 0.9);
+  font-size: 0.94rem;
+}
+
+.gg-guide-pills {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gg-guide-pill {
+  border: 1px solid rgba(191, 219, 254, 0.38);
+  border-radius: 9999px;
+  padding: 6px 10px;
+  background: rgba(2, 6, 23, 0.42);
+  color: #dbeafe;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gg-guide-highlight-row {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gg-guide-highlight-card {
+  border: 1px solid rgba(191, 219, 254, 0.28);
+  border-radius: 14px;
+  background: rgba(2, 6, 23, 0.38);
+  padding: 10px 12px;
+}
+
+.gg-guide-highlight-label {
+  color: #93c5fd;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.gg-guide-highlight-value {
+  margin-top: 6px;
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.gg-guide-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gg-guide-card {
+  border: 1px solid rgba(191, 219, 254, 0.26);
+  border-radius: 16px;
+  background: linear-gradient(155deg, rgba(2, 6, 23, 0.5), rgba(8, 23, 59, 0.3));
+  padding: 14px;
+}
+
+.gg-guide-card-wide {
+  grid-column: 1 / -1;
+}
+
+.gg-guide-card-title {
+  color: #f8fafc;
+  font-size: 1.03rem;
+  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.gg-guide-list {
+  margin-top: 10px;
+  padding-left: 18px;
+  color: rgba(226, 232, 240, 0.96);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.gg-guide-ordered {
+  list-style: decimal;
+}
+
+.gg-manage-wrap {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 18px;
+  display: grid;
+  place-items: center;
+}
+
+.gg-manage-card {
+  width: min(1020px, 96vw);
+  max-height: min(92vh, 820px);
+  overflow: auto;
+  border: 1px solid rgba(191, 219, 254, 0.36);
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgba(8, 19, 52, 0.8), rgba(10, 42, 89, 0.58));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 24px 58px rgba(2, 6, 23, 0.52);
+  padding: 22px;
+}
+
+.gg-manage-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gg-manage-form {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.gg-manage-success {
+  margin-top: 10px;
+  border: 1px solid rgba(134, 239, 172, 0.5);
+  border-radius: 10px;
+  background: rgba(6, 78, 59, 0.48);
+  color: #bbf7d0;
+  font-size: 0.82rem;
+  padding: 8px 10px;
+}
+
+.gg-users-list {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.gg-user-row {
+  border: 1px solid rgba(191, 219, 254, 0.28);
+  border-radius: 14px;
+  background: rgba(2, 6, 23, 0.4);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gg-user-email {
+  color: #eff6ff;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.gg-user-role {
+  margin-top: 2px;
+  color: #bfdbfe;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+.gg-user-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .gg-landing-overlay {
+    justify-content: flex-end;
+    margin: 0 auto;
+    padding: 0 18px 34px;
+    width: 100%;
+  }
+
+  .gg-landing-subtitle {
+    max-width: none;
+  }
+
+  .gg-landing-bg {
+    background-position: center;
+  }
+
+  .gg-manage-form {
+    grid-template-columns: 1fr;
+  }
+
+  .gg-user-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gg-guide-head {
+    flex-direction: column;
+  }
+
+  .gg-guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gg-guide-highlight-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .font-heading {

@@ -10,7 +10,11 @@ import LocationSearchBar from './LocationSearchBar';
 import RecenterButton from './RecenterButton';
 import DrawingControls from './DrawingControls';
 
-const API_URL = 'https://geo-guardian-backend.onrender.com/api/zones';
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL ||
+  'https://geo-guardian-backend.onrender.com';
+
+const API_URL = `${API_BASE_URL}/api/zones`;
 
 // Fix Leaflet default icon issue with Vite
 import L from 'leaflet';
