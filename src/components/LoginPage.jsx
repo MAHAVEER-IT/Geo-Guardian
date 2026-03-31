@@ -24,7 +24,7 @@ function LoginPage({ onSubmit, onBack, error }) {
             className="gg-login-input"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder="admin@gmail.com"
+            placeholder="Enter your registered email"
             required
           />
 
@@ -35,7 +35,7 @@ function LoginPage({ onSubmit, onBack, error }) {
             className="gg-login-input"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            placeholder="admin123"
+            placeholder="Enter your account password"
             required
           />
 
