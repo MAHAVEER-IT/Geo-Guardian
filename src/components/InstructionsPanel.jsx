@@ -19,6 +19,16 @@ function InstructionsPanel() {
           <span className="leading-relaxed"><span className="font-semibold text-white">Real-time alerts</span> when users enter zones</span>
         </li>
       </ul>
+
+      <a
+        href="https://github.com/MAHAVEER-IT/Geo-Guardian-App/releases/tag/Geo-Guardian-APK"
+        target="_blank"
+        rel="noreferrer"
+        className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-cyan-300/40 bg-cyan-500/15 px-2.5 py-1.5 text-[11px] font-semibold text-cyan-100 transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-500/25"
+      >
+        <span>Install APK</span>
+        <span aria-hidden="true">↗</span>
+      </a>
     </div>
   );
 }
